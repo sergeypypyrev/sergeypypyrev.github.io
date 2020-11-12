@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WebCam Recording</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/RecordRTC.js"></script>
+		<script>
+			var recorder;
+			function startOrStop(event) {
+				if (recorder) {
+					recorder.stopRecording(() => {
+						event.target.value = "Start Recording";
+						document.getElementById("video").style.display = "";
+						document.getElementById("text").style.display = "none";
+						var video = document.getElementById("play");
+						video.src = URL.createObjectURL(recorder.getBlob());
+						video.load();
+						video.onloadeddata = () => video.play();
+						recorder.destroy();
+						recorder = null;
+					});
+				} else {
+					navigator.mediaDevices.getUserMedia({
+						video: true,
+						audio: true
+					}).then(async function (stream) {
+						event.target.value = "Stop Recording";
+						document.getElementById("video").style.display = "none";
+						document.getElementById("text").style.display = "";
+						recorder = RecordRTC(stream, {
+							type: 'video'
+						});
+						recorder.startRecording();
+					});
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<br>
+			<div class="row">
+				<div class="col">
+					<h1>WebCam Recording</h1>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col">
+					<input type="button" class="btn btn-primary" onclick="startOrStop(event)" value="Start Recording">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col" id="video">
+					<video id="play"></video>
+				</div>
+				<div class="col text-info" id="text" style="display: none">
+					Recording...
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
