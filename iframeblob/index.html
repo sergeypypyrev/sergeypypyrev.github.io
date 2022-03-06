@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>iframe blob test</title>
+	</head>
+	<body>
+		<iframe></iframe>
+		<script>
+			var content = new Blob(["injected iframe content<script>alert(location.href)<\/script>"]);
+			document.querySelector("iframe").src = URL.createObjectURL(content);
+		</script>
+	</body>
+</html>
