@@ -5,7 +5,7 @@
 	<body>
 		<iframe></iframe>
 		<script>
-			var content = new Blob(["injected iframe content<script>alert('JS in iframe:\n' + location.href)<\/script>"], {type: "text/html"});
+			var content = new Blob(["injected iframe content<script>alert('JS in iframe:\\n' + location.href)<\/script>"], {type: "text/html"});
 			document.querySelector("iframe").src = URL.createObjectURL(content);
 		</script>
 	</body>
