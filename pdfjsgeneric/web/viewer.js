@@ -279,7 +279,6 @@ function _webViewerLoad() {
 
           case 4:
             pdf = _context.sent;
-            pdfjsWebAppOptions.AppOptions.set('defaultUrl', pdf);
             window.PDFViewerApplication = pdfjsWebApp.PDFViewerApplication;
             window.PDFViewerApplicationOptions = pdfjsWebAppOptions.AppOptions;
             event = document.createEvent('CustomEvent');
@@ -287,7 +286,7 @@ function _webViewerLoad() {
             document.dispatchEvent(event);
             pdfjsWebApp.PDFViewerApplication.run(config);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -4282,7 +4281,7 @@ var defaultOptions = {
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   defaultUrl: {
-    value: 'compressed.tracemonkey-pldi-09.pdf',
+    value: '',
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
