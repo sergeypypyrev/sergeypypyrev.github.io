@@ -17087,6 +17087,7 @@ document.addEventListener("webviewerloaded", function () {
 
   PDFViewerApplication.requestPresentationMode = function () {};
 
+  var eventBus = PDFViewerApplication.eventBus;
   var oldDispatch = eventBus.dispatch;
 
   eventBus.dispatch = function () {
