@@ -66,6 +66,12 @@ __webpack_require__(37);
 }
 
 function getViewerConfiguration() {
+  document.getElementById("openFile").setAttribute("hidden", "true");
+  document.getElementById("secondaryOpenFile").setAttribute("hidden", "true");
+  document.getElementById("download").setAttribute("hidden", "true");
+  document.getElementById("secondaryDownload").setAttribute("hidden", "true");
+  document.getElementById("print").setAttribute("hidden", "true");
+  document.getElementById("secondaryPrint").setAttribute("hidden", "true");
   return {
     appContainer: document.body,
     mainContainer: document.getElementById("viewerContainer"),
@@ -17078,6 +17084,19 @@ document.addEventListener("webviewerloaded", function () {
       return _ref.apply(this, arguments);
     };
   }();
+
+  PDFViewerApplication.requestPresentationMode = function () {};
+
+  var oldDispatch = eventBus.dispatch;
+
+  eventBus.dispatch = function () {
+    for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+      parameters[_key] = arguments[_key];
+    }
+
+    if (parameters[0] == "download" || parameters[0] == "openfile") return;
+    oldDispatch.call.apply(oldDispatch, [eventBus].concat(parameters));
+  };
 
   var params = new URLSearchParams(location.search);
   webkit.messageHandlers.copySafePDFHandler.postMessage({
