@@ -17057,54 +17057,70 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-document.addEventListener("webviewerloaded", function () {
-  window.loadPDF = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(pdf) {
-      return _regenerator["default"].wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return PDFViewerApplication.initializedPromise;
+document.addEventListener("webviewerloaded", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+  var eventBus, oldDispatch, params;
+  return _regenerator["default"].wrap(function _callee2$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          window.loadPDF = /*#__PURE__*/function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(pdf) {
+              return _regenerator["default"].wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return PDFViewerApplication.initializedPromise;
 
-            case 2:
-              PDFViewerApplication.open(Uint8Array.from(atob(pdf), function (_byte) {
-                return _byte.charCodeAt(0);
-              }));
+                    case 2:
+                      PDFViewerApplication.open(Uint8Array.from(atob(pdf), function (_byte) {
+                        return _byte.charCodeAt(0);
+                      }));
 
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
+                    case 3:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
 
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+            return function (_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }();
 
-  PDFViewerApplication.requestPresentationMode = function () {};
+          _context2.next = 3;
+          return PDFViewerApplication.initializedPromise;
 
-  var eventBus = PDFViewerApplication.eventBus;
-  var oldDispatch = eventBus.dispatch;
+        case 3:
+          PDFViewerApplication.requestPresentationMode = function () {};
 
-  eventBus.dispatch = function () {
-    for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-      parameters[_key] = arguments[_key];
+          eventBus = PDFViewerApplication.eventBus;
+          oldDispatch = eventBus.dispatch;
+
+          eventBus.dispatch = function () {
+            for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+              parameters[_key] = arguments[_key];
+            }
+
+            if (parameters[0] == "download" || parameters[0] == "openfile") return;
+            oldDispatch.call.apply(oldDispatch, [eventBus].concat(parameters));
+          };
+
+          params = new URLSearchParams(location.search);
+          webkit.messageHandlers.copySafePDFHandler.postMessage({
+            document: params.get("document"),
+            id: params.get("id")
+          });
+
+        case 9:
+        case "end":
+          return _context2.stop();
+      }
     }
-
-    if (parameters[0] == "download" || parameters[0] == "openfile") return;
-    oldDispatch.call.apply(oldDispatch, [eventBus].concat(parameters));
-  };
-
-  var params = new URLSearchParams(location.search);
-  webkit.messageHandlers.copySafePDFHandler.postMessage({
-    document: params.get("document"),
-    id: params.get("id")
-  });
-});
+  }, _callee2);
+})));
 
 /***/ }),
 /* 38 */
