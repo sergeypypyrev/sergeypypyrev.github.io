@@ -17057,44 +17057,23 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-document.addEventListener("webviewerloaded", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+document.addEventListener("webviewerloaded", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
   var eventBus, oldDispatch, params;
-  return _regenerator["default"].wrap(function _callee2$(_context2) {
+  return _regenerator["default"].wrap(function _callee$(_context) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context.prev = _context.next) {
         case 0:
-          window.loadPDF = /*#__PURE__*/function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(pdf) {
-              return _regenerator["default"].wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      _context.next = 2;
-                      return PDFViewerApplication.initializedPromise;
-
-                    case 2:
-                      PDFViewerApplication.open(Uint8Array.from(atob(pdf), function (_byte) {
-                        return _byte.charCodeAt(0);
-                      }));
-
-                    case 3:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
+          window.loadPDF = function (pdf) {
+            PDFViewerApplication.open(Uint8Array.from(atob(pdf), function (_byte) {
+              return _byte.charCodeAt(0);
             }));
+          };
 
-            return function (_x) {
-              return _ref2.apply(this, arguments);
-            };
-          }();
-
-          _context2.next = 3;
+          _context.next = 3;
           return PDFViewerApplication.initializedPromise;
 
         case 3:
-          PDFViewerApplication.requestPresentationMode = function () {};
+          window.print = function () {};
 
           eventBus = PDFViewerApplication.eventBus;
           oldDispatch = eventBus.dispatch;
@@ -17116,10 +17095,10 @@ document.addEventListener("webviewerloaded", /*#__PURE__*/_asyncToGenerator( /*#
 
         case 9:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
-  }, _callee2);
+  }, _callee);
 })));
 
 /***/ }),
