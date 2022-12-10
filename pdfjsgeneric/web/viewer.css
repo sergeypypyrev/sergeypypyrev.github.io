@@ -409,6 +409,9 @@
 }
 
 :root {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+
   --sidebar-width: 200px;
   --sidebar-transition-duration: 200ms;
   --sidebar-transition-timing-function: ease;
